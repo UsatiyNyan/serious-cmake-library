@@ -8,3 +8,4 @@ project(
 )
 
 include(cmake/project_prologue.cmake)
+include(cmake/CPM.cmake)
