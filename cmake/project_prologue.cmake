@@ -8,7 +8,8 @@ macro(sl_project_prologue)
             CXX_EXTENSIONS)
     set(_one_value_args
             # only set if not defined
-            CXX_STANDARD)
+            CXX_STANDARD
+            C_STANDARD)
     set(_multi_value_args "")
     cmake_parse_arguments(
             _project_prologue
@@ -20,6 +21,10 @@ macro(sl_project_prologue)
 
     if (NOT DEFINED CMAKE_CXX_STANDARD)
         set(CMAKE_CXX_STANDARD "${_project_prologue_CXX_STANDARD}")
+    endif ()
+
+    if (NOT DEFINED CMAKE_C_STANDARD)
+        set(CMAKE_C_STANDARD "${_project_prologue_C_STANDARD}")
     endif ()
 
     # NOTE(@cpp-best-practices):
