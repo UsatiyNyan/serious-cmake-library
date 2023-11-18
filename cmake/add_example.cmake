@@ -1,0 +1,5 @@
+function(sl_add_example lib name)
+    set(example_executable ${lib}_${name})
+    add_executable(${example_executable} src/${name}.cpp)
+    target_link_libraries(${example_executable} ${lib})
+endfunction()
