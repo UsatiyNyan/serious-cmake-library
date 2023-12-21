@@ -1,11 +1,11 @@
 # Include a system directory (which suppresses its warnings).
 function(sl_target_include_system_directories target)
-    set(multiValueArgs INTERFACE PUBLIC PRIVATE)
+    set(multi_value_args INTERFACE PUBLIC PRIVATE)
     cmake_parse_arguments(
             ARG
             ""
             ""
-            "${multiValueArgs}"
+            "${multi_value_args}"
             ${ARGN})
 
     foreach(scope IN ITEMS INTERFACE PUBLIC PRIVATE)
@@ -67,12 +67,12 @@ endfunction()
 
 # Link multiple library targets as system libraries (which suppresses their warnings).
 function(sl_target_link_system_libraries target)
-    set(multiValueArgs INTERFACE PUBLIC PRIVATE)
+    set(multi_value_args INTERFACE PUBLIC PRIVATE)
     cmake_parse_arguments(
             ARG
             ""
             ""
-            "${multiValueArgs}"
+            "${multi_value_args}"
             ${ARGN})
 
     foreach(scope IN ITEMS INTERFACE PUBLIC PRIVATE)

@@ -1,7 +1,6 @@
 include(cmake/prevent_in_source_builds.cmake)
-#
+
 # This function should be called before project(...)
-#
 function(sl_project_prologue)
     set(_options
             # defaults to false

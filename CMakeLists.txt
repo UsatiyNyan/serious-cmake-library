@@ -9,6 +9,7 @@ project(
 
 include(cmake/project_prologue.cmake)
 include(cmake/CPM.cmake)
+include(cmake/compiler_warnings.cmake)
 include(cmake/system_link.cmake)
 include(cmake/attach_directory.cmake)
 include(cmake/add_test.cmake)
