@@ -1,7 +1,8 @@
 # Enables compiler warnings for your project
 function(sl_compiler_warnings project_name)
     set(options WARNINGS_AS_ERRORS)
-    set(multi_value_args CLANG_WARNINGS GCC_WARNINGS CUDA_WARNINGS MSVC_WARNINGS)
+    set(multi_value_args CLANG_WARNINGS GCC_WARNINGS CUDA_WARNINGS MSVC_WARNINGS
+        EXTRA_CLANG_WARNINGS EXTRA_GCC_WARNINGS EXTRA_CUDA_WARNINGS EXTRA_MSVC_WARNINGS)
     cmake_parse_arguments(
             ARG
             "${options}"
@@ -80,6 +81,11 @@ function(sl_compiler_warnings project_name)
         )
     endif()
 
+    list(APPEND ARG_CLANG_WARNINGS ${ARG_EXTRA_CLANG_WARNINGS})
+    list(APPEND ARG_GCC_WARNINGS ${ARG_EXTRA_GCC_WARNINGS})
+    list(APPEND ARG_CUDA_WARNINGS ${ARG_EXTRA_CUDA_WARNINGS})
+    list(APPEND ARG_MSVC_WARNINGS ${ARG_EXTRA_MSVC_WARNINGS})
+
     if(ARG_WARNINGS_AS_ERRORS)
         message(TRACE "${project_name} warnings are treated as errors")
         list(APPEND ARG_CLANG_WARNINGS -Werror)
@@ -102,9 +108,9 @@ function(sl_compiler_warnings project_name)
 
     set(PROJECT_WARNINGS_CUDA "${ARG_CUDA_WARNINGS}")
 
-    message(TRACE "${project_name} compiler warnings: "
-            "CXX=${PROJECT_WARNINGS_CXX}, "
-            "C=${PROJECT_WARNINGS_C}, "
+    message(TRACE "${project_name} compiler warnings:\n"
+            "CXX=${PROJECT_WARNINGS_CXX},\n"
+            "C=${PROJECT_WARNINGS_C},\n"
             "CUDA=${PROJECT_WARNINGS_CUDA}")
 
     target_compile_options(
