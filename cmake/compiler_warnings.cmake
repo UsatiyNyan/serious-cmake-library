@@ -1,3 +1,5 @@
+include("${CMAKE_CURRENT_LIST_DIR}/detect.cmake")
+
 # Enables compiler warnings for your project
 function(sl_compiler_warnings project_name)
     set(options WARNINGS_AS_ERRORS)
@@ -93,11 +95,12 @@ function(sl_compiler_warnings project_name)
         list(APPEND ARG_MSVC_WARNINGS /WX)
     endif()
 
-    if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    sl_detect_compiler(_compiler)
+    if(_compiler STREQUAL "clang")
         set(PROJECT_WARNINGS_CXX ${ARG_CLANG_WARNINGS})
-    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    elseif(_compiler STREQUAL "gcc")
         set(PROJECT_WARNINGS_CXX ${ARG_GCC_WARNINGS})
-    elseif(MSVC)
+    elseif(_compiler STREQUAL "msvc")
         set(PROJECT_WARNINGS_CXX ${ARG_MSVC_WARNINGS})
     else()
         message(AUTHOR_WARNING "No compiler warnings set for CXX compiler: '${CMAKE_CXX_COMPILER_ID}'")

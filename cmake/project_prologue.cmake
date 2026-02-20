@@ -1,4 +1,4 @@
-include(cmake/prevent_in_source_builds.cmake)
+include("${CMAKE_CURRENT_LIST_DIR}/prevent_in_source_builds.cmake")
 
 # This function should be called before project(...)
 function(sl_project_prologue)
