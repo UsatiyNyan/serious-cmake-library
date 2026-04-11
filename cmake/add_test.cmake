@@ -2,7 +2,10 @@ include("${CMAKE_CURRENT_LIST_DIR}/system_link.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/CPM.cmake")
 
 macro(sl_gtest_prologue version)
-    cpmaddpackage("gh:google/googletest#${version}")
+    cpmaddpackage(
+          NAME googletest
+          URL "https://github.com/google/googletest/archive/refs/tags/${version}.tar.gz"
+    )
     include(GoogleTest)
 endmacro()
 
